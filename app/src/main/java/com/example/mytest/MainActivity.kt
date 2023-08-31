@@ -41,30 +41,31 @@ class MainActivity : AppCompatActivity() {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
 
-                Log.e("Ninad","In Coroutine")
+                Log.e("Ninad", "In Coroutine")
                 val api = retrofit.create(ItemsApi::class.java)
                 val response = api.getItems()
 
                 if (response.status == "success") {
                     val items = response.items
 
-                    Log.e("Ninad","In Coroutine Success")
+                    Log.e("Ninad", "In Coroutine Success")
                     withContext(Dispatchers.Main) {
                         adapter.items = items
                         adapter.notifyDataSetChanged()
                     }
                 } else {
-                    Log.e("Ninad","In Coroutine ELse")
+                    Log.e("Ninad", "In Coroutine ELse")
 
                     // Handle error response
                 }
             } catch (e: Exception) {
                 // Handle exception
-                Log.e("Ninad","In Coroutine exception")
+                Log.e("Ninad", "In Coroutine exception")
             }
         }
 
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return true
@@ -112,7 +113,6 @@ class ItemsAdapter(private val context: Context, var items: List<Item>) : BaseAd
         }
     }
 }
-
 
 
 data class Item(val itemName: String, val itemPrice: Int, val itemBarcode: String, val url: String)
